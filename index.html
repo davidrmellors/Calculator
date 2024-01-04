@@ -5,31 +5,43 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
+        <main>
         <div class="Calculator">
-            <div>
-                
+            <div class="display">
+                <div class="values"></div>
             </div>
-            <div class="num-buttons">
-                <div class=" row fourth-row">
-                    <button value="7">7</button>
-                    <button value="8">8</button>
-                    <button value="9">9</button>
-                <div class=" row third-row">
-                    <button value="4">4</button>
-                    <button value="5">5</button>
-                    <button value="6">6</button>
+            <div class="buttons">
+                <div class="num-buttons">
+                    <div class="row fourth-row">
+                        <button class="num-btn" value="7">7</button>
+                        <button class="num-btn" value="8">8</button>
+                        <button class="num-btn" value="9">9</button>
+                    </div>
+                    <div class="row third-row">
+                        <button class="num-btn" value="4">4</button>
+                        <button class="num-btn" value="5">5</button>
+                        <button class="num-btn" value="6">6</button>
+                    </div>
+                    <div class="row second-row">
+                        <button class="num-btn" value="1">1</button>
+                        <button class="num-btn" value="2">2</button>
+                        <button class="num-btn" value="3">3</button>
+                    </div>
+                    <div class="row first-row">
+                        <button id="clear-btn">C</button>
+                        <button class="num-btn" value="0">0</button>
+                        <button id="equal-btn" value="=">=</button>
+                    </div>
                 </div>
-                <div class="row second-row">
-                    <button value="1">1</button>
-                    <button value="2">2</button>
-                    <button value="3">3</button>
-                </div>
-                <div class="row first-row">
-                    <button value="0">0</button>
+                <div class="operators-container">
+                    <button value="+" class="operator">+</button>
+                    <button value="-" class="operator">-</button>
+                    <button value="x" class="operator">x</button>
+                    <button value="/" class="operator">/</button>
                 </div>
             </div>
-            
         </div>
+        </main>
         <script src="script.js"></script>
     </body>
 </html>
