@@ -195,6 +195,7 @@ numButtons.forEach(numButton => {
 });
 
 
+
 function displayValue(string) {
     values.textContent += string;
     value = string;

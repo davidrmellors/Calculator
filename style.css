@@ -8,7 +8,10 @@ body {
     height: 100vh;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
+
 button {
     width: 100px;
     height: 100px;
@@ -16,13 +19,20 @@ button {
     font-size: large;
     border: 1px solid black;
     border-radius: 5px;
+    cursor: pointer;
 }
+
+button:hover {
+    transform: scale(1.02);
+}
+
 
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex: 1 1 auto;
 }
 
 .clear-container {
@@ -111,3 +121,23 @@ main {
     color: white;
 }
 
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+.fa-github {
+    color: var(--font);
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
+}
