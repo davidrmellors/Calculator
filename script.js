@@ -14,18 +14,30 @@ let operators = document.querySelectorAll('.operator');
 let equation = document.querySelector('.equation');
 let deleteBtn = document.querySelector('#delete-btn');
 
+let equalsActive = false;
 let stringNum = "";
 
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
 
+        if(equalsActive == true){
+            equalsActive = false;
+            values.textContent = operandStack.slice(-1)[0];
+            operandStack.pop();
+            console.log(operandStack[-1]);
+        }
+        
+        
         selectedOperator = operator.value;
         equation.textContent = '';
 
         if(operandStack.length == 0){
             firstNumber = Number(values.textContent);
             operandStack.push(firstNumber);
+            equation.textContent += `${firstNumber} ${selectedOperator} `;
+        }
+        else if(operandStack.length == 1 && operatorStack.length == 0){
             equation.textContent += `${firstNumber} ${selectedOperator} `;
         }
         else if(operandStack.length == 1 && operatorStack.length == 1) {
@@ -48,6 +60,7 @@ operators.forEach(operator => {
 
 equalBtn.addEventListener('click', () => {
 
+    equalsActive = true;
     if(operandStack.length > 0) {
         operandStack.push(values.textContent);
         let currOperator = operatorStack.pop();
@@ -57,11 +70,12 @@ equalBtn.addEventListener('click', () => {
         equation.textContent +=` ${secondOperand} ${equalBtn.value}`;
 
         let answer = Math.round((operate(firstOperand, currOperator, secondOperand))*100)/100;
+
+        operandStack.push(answer);
         values.textContent = answer;
         console.log(answer);
     }
 
-    
 
 });
 
@@ -87,6 +101,22 @@ deleteBtn.addEventListener('click', () => {
 numButtons.forEach(numButton => {
     numButton.addEventListener('click', () => {
         
+        console.log(`operand stack: ${operandStack.length}`);
+
+        
+        // press equals button
+        // display answer
+        // set equals button to active
+        // if equals button active
+        // empty display and set equals to inactive
+        if(equalsActive == true){
+            values.textContent = '';
+            equation.textContent = '';
+            operandStack.pop();
+            equalsActive = false;
+        }
+
+
         if(selectedOperator.length > 0) {
             operatorStack.push(selectedOperator);
             selectedOperator = '';
