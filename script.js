@@ -12,7 +12,7 @@ let equalBtn = document.querySelector('#equal-btn');
 let clearBtn = document.querySelector('#clear-btn');
 let operators = document.querySelectorAll('.operator');
 let equation = document.querySelector('.equation');
-let deleteBtn = document.querySelector('deleteBtn');
+let deleteBtn = document.querySelector('#delete-btn');
 
 let stringNum = "";
 
@@ -76,7 +76,12 @@ clearBtn.addEventListener('click', () => {
 });
 
 
+deleteBtn.addEventListener('click', () => {
+    let string = values.textContent;
+    let stringLength = values.textContent.length;
 
+    values.textContent =  string.substring(0, stringLength - 1);
+});
 
 
 numButtons.forEach(numButton => {
@@ -88,13 +93,8 @@ numButtons.forEach(numButton => {
             values.textContent = "";
         }
 
-
-// if operandStack > 0
         values.textContent += numButton.value;
 
-        if(firstNumber.length == 0) {
-
-        }
 
     })
 });
