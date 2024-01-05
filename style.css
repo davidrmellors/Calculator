@@ -18,6 +18,19 @@ main {
     justify-content: center;
 }
 
+.clear-container {
+    width: 100%;
+    display: flex;
+}
+
+#clear-btn {
+    width: 105px;
+}
+
+#delete-btn {
+    width: 105px;
+    background-color: rgba(65, 93, 168, 0.849);
+}
 
 .Calculator {
     display: flex;
@@ -58,7 +71,7 @@ main {
 .buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     
 }
 

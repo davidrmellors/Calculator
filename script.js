@@ -11,6 +11,8 @@ let numButtons = document.querySelectorAll('.num-btn');
 let equalBtn = document.querySelector('#equal-btn');
 let clearBtn = document.querySelector('#clear-btn');
 let operators = document.querySelectorAll('.operator');
+let equation = document.querySelector('.equation');
+let deleteBtn = document.querySelector('deleteBtn');
 
 let stringNum = "";
 
@@ -18,12 +20,13 @@ let stringNum = "";
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
 
-        console.log(operator.value);
         selectedOperator = operator.value;
+        equation.textContent = '';
 
         if(operandStack.length == 0){
             firstNumber = Number(values.textContent);
             operandStack.push(firstNumber);
+            equation.textContent += `${firstNumber} ${selectedOperator} `;
         }
         else if(operandStack.length == 1 && operatorStack.length == 1) {
             secondNumber = Number(values.textContent);
@@ -34,23 +37,31 @@ operators.forEach(operator => {
 
             let answer = operate(firstOperand, currOperator, secondOperand);
             operandStack.push(answer);
-            values.textContent = answer;
 
+            values.textContent = answer;
+            equation.textContent += `${answer} ${selectedOperator} `;
             console.log(secondNumber);
         }    
+        
     })
 });
 
 equalBtn.addEventListener('click', () => {
 
-    operandStack.push(values.textContent);
-    let currOperator = operatorStack.pop();
-    let secondOperand = operandStack.pop();
-    let firstOperand = operandStack.pop();
+    if(operandStack.length > 0) {
+        operandStack.push(values.textContent);
+        let currOperator = operatorStack.pop();
+        let secondOperand = operandStack.pop();
+        let firstOperand = operandStack.pop();
 
-    let answer = operate(firstOperand, currOperator, secondOperand);
-    values.textContent = answer;
-    console.log(answer);
+        equation.textContent +=` ${secondOperand} ${equalBtn.value}`;
+
+        let answer = Math.round((operate(firstOperand, currOperator, secondOperand))*100)/100;
+        values.textContent = answer;
+        console.log(answer);
+    }
+
+    
 
 });
 
@@ -61,7 +72,11 @@ clearBtn.addEventListener('click', () => {
     firstNumber = "";
     secondNumber = "";
     values.textContent = "";
+    equation.textContent = "";
 });
+
+
+
 
 
 numButtons.forEach(numButton => {
