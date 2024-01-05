@@ -34,7 +34,6 @@ operators.forEach(operator => {
         }
 
         
-        
         selectedOperator = operator.value;
         equation.textContent = '';
 
@@ -144,6 +143,27 @@ numButtons.forEach(numButton => {
         operatorEqualsActive = false;
         numButtonActive = true;
 
+        let reachedMaxLength = false;
+        let multipleDecimalFound = false;
+        let currentValue = values.textContent;
+        
+
+        if(numButton.value == '.'){
+            for(let i = 0; i < currentValue.length; i++){
+                if(currentValue[i] == '.'){
+                    multipleDecimalFound = true;
+                }
+            }
+        }
+
+        if(currentValue.length == 15){
+            reachedMaxLength = true;
+            alert("You have reached the max length");
+        }
+        
+
+
+
         console.log(`operand stack: ${operandStack.length}`);
 
         // press equals button
@@ -151,21 +171,24 @@ numButtons.forEach(numButton => {
         // set equals button to active
         // if equals button active
         // empty display and set equals to inactive
-        if(equalsActive == true){
-            values.textContent = '';
-            equation.textContent = '';
-            operandStack.pop();
-            equalsActive = false;
+        if(multipleDecimalFound == false && reachedMaxLength != 16){
+            if(equalsActive == true){
+                values.textContent = '';
+                equation.textContent = '';
+                operandStack.pop();
+                equalsActive = false;
+            }
+    
+    
+            if(selectedOperator.length > 0) {
+                operatorStack.push(selectedOperator);
+                selectedOperator = '';
+                values.textContent = "";
+            }
+    
+            values.textContent += numButton.value;
         }
-
-
-        if(selectedOperator.length > 0) {
-            operatorStack.push(selectedOperator);
-            selectedOperator = '';
-            values.textContent = "";
-        }
-
-        values.textContent += numButton.value;
+        
 
 
     })
