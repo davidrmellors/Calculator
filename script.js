@@ -15,18 +15,24 @@ let equation = document.querySelector('.equation');
 let deleteBtn = document.querySelector('#delete-btn');
 
 let equalsActive = false;
-let stringNum = "";
-
+let operatorEqualsActive = false;
+let deleteBtnActive = false;
+let operatorActive = false;
+let numButtonActive = false;
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
 
-        if(equalsActive == true){
+        operatorActive = true;
+        deleteBtnActive = false;
+
+        if(equalsActive == true || operatorEqualsActive == true){
             equalsActive = false;
+            operatorEqualsActive = false;
             values.textContent = operandStack.slice(-1)[0];
             operandStack.pop();
-            console.log(operandStack[-1]);
         }
+
         
         
         selectedOperator = operator.value;
@@ -51,8 +57,10 @@ operators.forEach(operator => {
             operandStack.push(answer);
 
             values.textContent = answer;
+            console.log(answer);
             equation.textContent += `${answer} ${selectedOperator} `;
             console.log(secondNumber);
+            operatorEqualsActive = true;
         }    
         
     })
@@ -60,50 +68,84 @@ operators.forEach(operator => {
 
 equalBtn.addEventListener('click', () => {
 
-    equalsActive = true;
-    if(operandStack.length > 0) {
-        operandStack.push(values.textContent);
-        let currOperator = operatorStack.pop();
-        let secondOperand = operandStack.pop();
-        let firstOperand = operandStack.pop();
+    if(deleteBtnActive == false && operatorEqualsActive == false && equalsActive == false
+        && operatorActive == false && operandStack.length > 0){
+        equalsActive = true;
+        if(operandStack.length == 1 ) {
+            operandStack.push(values.textContent);
+            let currOperator = operatorStack.pop();
+            let secondOperand = operandStack.pop();
+            let firstOperand = operandStack.pop();
 
-        equation.textContent +=` ${secondOperand} ${equalBtn.value}`;
+            if(currOperator == '÷' && secondOperand == 0 ) {
+                alert("You cannot divide by 0");
+            }
+            else {
+                equation.textContent +=` ${secondOperand} ${equalBtn.value}`;
 
-        let answer = Math.round((operate(firstOperand, currOperator, secondOperand))*100)/100;
+                let answer = Math.round((operate(firstOperand, currOperator, secondOperand))*100)/100;
 
-        operandStack.push(answer);
-        values.textContent = answer;
-        console.log(answer);
+                operandStack.push(answer);
+                values.textContent = answer;
+                console.log(answer);
+            }
+            
+        }
     }
+    
 
 
 });
 
 
 clearBtn.addEventListener('click', () => {
+    values.tex
+    clearAll();
+});
+
+
+
+function clearAll(){
     operandStack = [];
     operatorStack = [];
     firstNumber = "";
     secondNumber = "";
+    selectedOperator = "";
     values.textContent = "";
     equation.textContent = "";
-});
-
+    equalsActive = false;
+    operatorEqualsActive = false;
+}
 
 deleteBtn.addEventListener('click', () => {
+    deleteBtnActive = true;
     let string = values.textContent;
     let stringLength = values.textContent.length;
+    let updatedString = string.substring(0, stringLength - 1);
+    values.textContent = updatedString;
 
-    values.textContent =  string.substring(0, stringLength - 1);
+
+    if(equalsActive == true || operatorEqualsActive == true){
+        console.log(updatedString);
+        operandStack.pop();
+        operandStack.push(updatedString);
+    }
+
+
+
 });
 
 
 numButtons.forEach(numButton => {
     numButton.addEventListener('click', () => {
         
+        operatorActive = false;
+        deleteBtnActive = false;
+        operatorEqualsActive = false;
+        numButtonActive = true;
+
         console.log(`operand stack: ${operandStack.length}`);
 
-        
         // press equals button
         // display answer
         // set equals button to active
@@ -139,6 +181,7 @@ function displayValue(string) {
 function operate(num1, operator, num2) {
     num1 = Number(num1);
     num2 = Number(num2);
+
     switch(operator){
         case "+":
             return add(num1, num2);
@@ -146,7 +189,7 @@ function operate(num1, operator, num2) {
             return subtract(num1, num2);
         case "x":
             return multiply(num1, num2);
-        case "/":
+        case "÷":
             return divide(num1, num2);
         default:
             break;

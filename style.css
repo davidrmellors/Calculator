@@ -5,17 +5,24 @@
 
 body {
     font-family: 'SF-Pro', sans-serif;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 button {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     font-family: 'SF Pro';
-    font-weight: bolder;
+    font-size: large;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 main {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .clear-container {
@@ -24,11 +31,12 @@ main {
 }
 
 #clear-btn {
-    width: 105px;
+    width: 205px;
+    background-color: rgba(175, 56, 56, 0.767);
 }
 
 #delete-btn {
-    width: 105px;
+    width: 205px;
     background-color: rgba(65, 93, 168, 0.849);
 }
 
@@ -36,19 +44,22 @@ main {
     display: flex;
     flex-direction: column;
     background-color: rgb(196, 196, 196);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 2px solid black;
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
 .display {
-    width: 214px;
-    height: 50px;
+    width: 415px;
+    height: 150px;
     background-color: rgb(226, 226, 226);
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 .values {
@@ -56,16 +67,18 @@ main {
     height: 60%;
     font-family: inherit;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 50px;
     text-align: right;
     
 }
 
 .equation {
+    display: flex;
+    justify-content: right;
+    align-items: center;
     width: 95%;
     height: 40%;
-    font-size: 15px;
-    text-align: right;
+    font-size: 25px;
 }
 
 .buttons {
@@ -98,7 +111,3 @@ main {
     color: white;
 }
 
-
-#clear-btn {
-    background-color: rgba(175, 56, 56, 0.767);
-}
