@@ -52,7 +52,7 @@ operators.forEach(operator => {
             let secondOperand = operandStack.pop();
             let firstOperand = operandStack.pop();
 
-            let answer = operate(firstOperand, currOperator, secondOperand);
+            let answer = Math.round((operate(firstOperand, currOperator, secondOperand))*100)/100;
             operandStack.push(answer);
 
             values.textContent = answer;
